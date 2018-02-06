@@ -1,67 +1,56 @@
 
 public class ArrayMethods2 {
-	public static int[] merge(int[] list1, int[] list2)
-	{
-		 private int[] numbers;
-		 private int[] helper;
-
-		 private int number;
-
-	     public void sort(int[] values) {
-		 this.numbers = values;
-	     number = values.length;
-		 this.helper = new int[number];
-		 mergesort(0, number - 1);
-		    }
-
-		    private void mergesort(int low, int high) {
-		        // check if low is smaller than high, if not then the array is sorted
-		        if (low < high) {
-		            // Get the index of the element which is in the middle
-		            int middle = low + (high - low) / 2;
-		            // Sort the left side of the array
-		            mergesort(low, middle);
-		            // Sort the right side of the array
-		            mergesort(middle + 1, high);
-		            // Combine them both
-		            merge(low, middle, high);
-		        }
-		    }
-
-		    private void merge(int low, int middle, int high) {
-
-		        // Copy both parts into the helper array
-		        for (int i = low; i <= high; i++) {
-		            helper[i] = numbers[i];
-		        }
-
-		        int i = low;
-		        int j = middle + 1;
-		        int k = low;
-		        // Copy the smallest values from either the left or the right side back
-		        // to the original array
-		        while (i <= middle && j <= high) {
-		            if (helper[i] <= helper[j]) {
-		                numbers[k] = helper[i];
-		                i++;
-		            } else {
-		                numbers[k] = helper[j];
-		                j++;
-		            }
-		            k++;
-		        }
-		        // Copy the rest of the left side of the array into the target array
-		        while (i <= middle) {
-		            numbers[k] = helper[i];
-		            k++;
-		            i++;
-		        }
-		        // Since we are sorting in-place any leftover elements from the right side
-		        // are already at the right position.
-
-		    }
-		}
-}
 	
+	public static void main(String[] args) {
+        String[] ClassOne = {"zebra", "tortilla", "abba", "foo", "wall", "method"};
+        String[] ClassTwo = { "bar", "baz", "monkey", "Stuff", "java", "pass" };
+        String[] names = new String[ClassOne.length + ClassTwo.length];
+
+        mergeSort(ClassOne);
+        mergeSort(ClassTwo);
+
+        merge(names, ClassOne, ClassTwo);
+
+        mergeSort(names);
+        //Arrays.sort(names);
+
+        for (String ClassThree : names) {
+            System.out.println(ClassThree);
+        }
+    }
+
+    public static void mergeSort(String[] names) {
+        if (names.length > 2) {
+            String[] left = new String[names.length / 2];
+            String[] right = new String[names.length - names.length / 2];
+
+            for (int i = 0; i < left.length; i++) {
+                left[i] = names[i];
+            }
+
+            for (int i = 0; i < right.length; i++) {
+                right[i] = names[i + names.length / 2];
+            }
+
+            mergeSort(left);
+            mergeSort(right);
+            merge(names, left, right);
+        }
+    }
+
+    public static void merge(String[] names, String[] left, String[] right) {
+        int a = 0;
+        int b = 0;
+        for (int i = 0; i < names.length; i++) {
+            if (b >= right.length || (a < left.length && left[a].compareToIgnoreCase(right[b]) < 0)) {
+                names[i] = left[a];
+                a++;
+            } else {
+                names[i] = right[b];
+                b++;
+            }
+        }
+    }
+}
 	
 	
