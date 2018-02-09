@@ -51,6 +51,58 @@ public class ArrayMethods2 {
             }
         }
     }
+    
+    public static String[] merge(String[] list1, String[] list2) {
+		String merged[] = new String[list1.length+list2.length-1];
+		int a=0;
+		int b=0;
+		for(int i=0; i<merged.length;i++) {
+			if(list1[a].compareTo(list2[b])<0) {
+				merged[i]=list1[a];
+				if(a<list1.length-1) {
+				a++;
+				}
+			}else if(list1[a].compareTo(list2[b])>0){
+				merged[i]=list2[b];
+				if(b<list2.length-1) {
+				b++;
+				}
+			}else {
+				merged[i]=list1[a];
+				a++;
+				i++;
+				merged[i]=list1[b];
+				b++;
+			}
+		}
+		return merged;
+	}
+    public static int partition(int[] list) {
+		int[] partitioned= new int[list.length];
+		int a = 0;
+		int x = list[0];
+		for(int i=1;i<list.length;i++) {
+			if(list[0]>list[i]) {
+				partitioned[a]=list[i];
+				a++;
+			}
+		}
+		
+		partitioned[a]=3;
+		x = a;
+		a++;
+		for(int i=1;i<list.length;i++) {
+			if(list[0]<=list[i]) {
+				partitioned[a]=list[i];
+				a++;
+			}
+		}
+		for(int i=0;i<list.length;i++) {
+		list[i] = partitioned[i];
+		}
+		System.out.println(x);
+		return x;
+	}
 }
 	
 	
