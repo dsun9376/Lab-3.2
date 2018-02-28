@@ -1,23 +1,29 @@
+import java.util.Arrays;
 
 public class ArrayMethods2 {
 	
 	public static void main(String[] args) {
         String[] ClassOne = {"zebra", "tortilla", "abba", "foo", "wall", "method"};
         String[] ClassTwo = { "bar", "baz", "monkey", "Stuff", "java", "pass" };
-        String[] names = new String[ClassOne.length + ClassTwo.length];
-
-        mergeSort(ClassOne);
-        mergeSort(ClassTwo);
-
-        merge(names, ClassOne, ClassTwo);
-
-        mergeSort(names);
-        //Arrays.sort(names);
-
-        for (String ClassThree : names) {
-            System.out.println(ClassThree);
+        int[] Class3 = {3,5,67,8,9,1,2};
+       
+        long start = System.nanoTime();
+        String[] mergeResult = merge(ClassOne,ClassTwo);
+        long end = System.nanoTime();
+        long time = end - start;
+        System.out.println( " Merge test took: " + time + " nanoseconds");
+        System.out.println(Arrays.toString(mergeResult));
+        
+        start = System.nanoTime();
+        int pivotFinalPos = partition(Class3);
+        end = System.nanoTime();
+        time = end - start;
+        System.out.println( "Partition test took: " + time + " nanoseconds");
+        System.out.println("Final Pivot Position: " + pivotFinalPos);
+        System.out.println(Arrays.toString(Class3));
+        
         }
-    }
+    
 
     public static void mergeSort(String[] names) {
         if (names.length > 2) {
